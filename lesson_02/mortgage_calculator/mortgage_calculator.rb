@@ -1,5 +1,5 @@
 require 'yaml'
-MESSAGES = YAML.load_file('mortgage_calculator_messages.yml')
+MESSAGES = YAML.load_file('config.yml')
 
 def prompt(message)
   puts "=> #{message}"
