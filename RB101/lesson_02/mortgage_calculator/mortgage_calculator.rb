@@ -10,20 +10,57 @@ def valid_number?(input)
 end
 
 def valid_integer?(input)
-  input.to_i.to_s == input && input.to_i > 0
+  input.to_i.to_s == input
 end
 
 def valid_float?(input)
-  input.to_f.to_s == input && input.to_i > 0
+  input.to_f.to_s == input
 end
 
 def valid_restart?(input)
   input.casecmp?('yes') || input.casecmp?('no')
 end
 
-def monthly_payment(loan, monthly_rate, duration)
-  result = loan * (monthly_rate / (1 - (1 + monthly_rate)**-duration))
-  result = '%.2f' % result
+def retrieve_loan
+  input = ''
+  prompt(MESSAGES['retrieve_loan'])
+  loop do
+    print '£'
+    input = gets.chomp
+    break if valid_number?(input) && input.to_f > 0
+    prompt(MESSAGES['invalid_loan'])
+  end
+  input
+end
+
+def retrieve_apr
+  input = ''
+  prompt(MESSAGES['retrieve_apr'])
+  loop do
+    input = gets.chomp
+    break if valid_number?(input) && input.to_f >= 0
+    prompt(MESSAGES['invalid_apr'])
+  end
+  input
+end
+
+def retrieve_duration
+  input = ''
+  prompt(MESSAGES['retrieve_duration'])
+  loop do
+    input = gets.chomp
+    break if valid_integer?(input) && input.to_f > 0
+    prompt(MESSAGES['invalid_duration'])
+  end
+  input
+end
+
+def retrieve_monthly_payment(loan, monthly_rate, duration)
+  if monthly_rate == 0.0
+    loan.to_f / duration.to_i
+  else
+    loan.to_f * (monthly_rate / (1 - (1 + monthly_rate)**-duration.to_i))
+  end
 end
 
 prompt(MESSAGES['welcome'])
@@ -34,34 +71,25 @@ duration = ''
 restart = ''
 
 loop do
-  prompt(MESSAGES['request_loan'])
-  loop do
-    print '£'
-    loan = gets.chomp
-    break if valid_number?(loan)
-    prompt(MESSAGES['invalid_loan'])
-  end
+  loan = retrieve_loan
+  apr = retrieve_apr
+  duration = retrieve_duration
+  monthly_rate = apr.to_f / 12
 
-  prompt(MESSAGES['request_apr'])
-  loop do
-    apr = gets.chomp
-    break if valid_number?(apr)
-    prompt(MESSAGES['invalid_apr'])
-  end
-
-  prompt(MESSAGES['request_duration'])
-  loop do
-    duration = gets.chomp
-    break if valid_integer?(duration)
-    prompt(MESSAGES['invalid_duration'])
-  end
+  monthly_payment = retrieve_monthly_payment(loan, monthly_rate, duration)
 
   prompt(MESSAGES['processing_message'])
 
-  result = monthly_payment(loan.to_f, apr.to_f / 12, duration.to_i)
-  prompt("For borrowing £#{loan} over #{duration} months at #{apr}%, 
-    your monthly payment will be £#{result}.")
-  
+  prompt(
+    format(
+      MESSAGES['result_message'],
+      loan: loan,
+      duration: duration,
+      apr: apr + '%',
+      monthly_payment: format('%.2f', monthly_payment)
+    )
+  )
+
   prompt(MESSAGES['restart?'])
 
   loop do

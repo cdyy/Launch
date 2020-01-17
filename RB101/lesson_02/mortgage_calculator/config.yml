@@ -1,20 +1,18 @@
 welcome: "Welcome to the Car Loan Calculator!"
 
-request_loan: "What is the loan amount?"
-invalid_loan: "Something's wrong with your loan amount. Please enter again."
+retrieve_loan: "What is the loan amount?"
+invalid_loan: "Your loan amount must be a number and more than £0. Please enter again."
 
-request_apr: "What is the APR on the loan? Enter 3 for 3%"
-invalid_apr: "This is not a valid APR. Please enter again."
+retrieve_apr: "What is the APR on the loan? E.g. Enter 2.5 for 2.5%"
+invalid_apr: "The APR has to be a number and it can't be less than 0. Please enter again."
 
-request_duration: "For how long you want to pay it back? Enter the term in months."
+retrieve_duration: "For how long you want to pay it back? Enter the term in months."
 invalid_duration: "This is not a valid number of months. Please enter again."
 
 processing_message: "Calculating in process...\n\n"
+result_message: "You wish to borrow £%{loan} over %{duration} months at %{apr}.\nBased on our calculation, your monthly payment will be £%{monthly_payment}."
 
 restart?: "Do you want to do another calculation?\n --- 'Yes' to start another calculation\n --- 'No' to exit"
 invalid_restart: "Please enter 'Yes' or 'No'."
 restart_yes: "OK, here we go again..."
 restart_no: "Thank you for using the Car Loan Calculator! Bye bye!"
-
-# result_message1: "For borrowing £#{loan} over #{duration} months at #{apr}%,"
-# result_message2: "your monthly payment will be £#{result.round(2)}."
