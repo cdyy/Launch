@@ -1,4 +1,3 @@
-
 VALID_CHOICES = {
   'r' => 'rock',
   'p' => 'paper',
@@ -6,6 +5,12 @@ VALID_CHOICES = {
   'l' => 'lizard',
   'sp' => 'spock'
 }.freeze
+
+score = {
+  player: 0,
+  computer: 0,
+  round: 1
+}
 
 def prompt(message)
   puts "=> #{message}"
@@ -40,6 +45,38 @@ def display_results(player, computer)
   end
 end
 
+def display_score(score = {})
+  display_score_prompt = <<-MSG
+=================================
+Round #{score[:round]}
+You(#{score[:player]}) vs Computer(#{score[:computer]})
+=================================
+MSG
+  puts display_score_prompt
+end
+
+def display_grand_winner(score = {})
+  if score[:player] == 5
+    prompt('The match is over! The grand winner is YOU! ^_^')
+  elsif score[:computer] == 5
+    prompt('The match is over! The grand winner is COMPUTER!')
+  end
+end
+
+def reset_score(score = {})
+  score[:player] = 0
+  score[:computer] = 0
+  score[:round] = 1
+end
+
+def update_score(player, computer, score = {})
+  if win?(player, computer)
+    score.update(score) { |k, v| k == :player ? v + 1 : v }
+  elsif win?(computer, player)
+    score.update(score) { |k, v| k == :computer ? v + 1 : v }
+  end
+end
+
 input = ''
 choice_prompt = <<-MSG
 Choose your move:
@@ -47,28 +84,45 @@ Choose your move:
     paper -     p
     scissors - sc
     lizard -    l
-    spock -    sp
+    spock -    sp    (Enter 'exit' to exit game)
 MSG
 
-prompt('Welcome to Rock Paper Scissors Lizard Spock!')
+puts "\n\n\~*Welcome to Rock Paper Scissors Lizard Spock!*~\n\n"
+prompt("When either the player or computer reaches
+  five wins, the match is over, and the winning
+  player becomes the grand winner.")
 
 loop do
-  loop do
-    prompt(choice_prompt)
-    input = gets.chomp.downcase
+  reset_score(score)
+  display_score(score)
 
-    break if valid_choice?(input)
-    prompt("That's not a valid choice.")
+  loop do
+    score[:round] += 1
+    loop do
+      prompt(choice_prompt)
+      input = gets.chomp.downcase
+
+      break if valid_choice?(input) || input == 'exit'
+      prompt("That's not a valid choice.")
+    end
+
+    break if input == 'exit'
+
+    choice = choice_in_fulltext(input)
+    computer_choice = VALID_CHOICES.values.sample
+    prompt("You chose #{choice}; computer chose #{computer_choice}")
+
+    display_results(choice, computer_choice)
+    update_score(choice, computer_choice, score)
+    display_score(score)
+    break if score[:player] == 5 || score[:computer] == 5
   end
 
-  choice = choice_in_fulltext(input)
-  computer_choice = VALID_CHOICES.values.sample
+  break if input == 'exit'
 
-  prompt("You chose #{choice}; computer chose #{computer_choice}")
+  display_grand_winner(score)
 
-  display_results(choice, computer_choice)
-
-  prompt('Do you want to play again?')
+  prompt("Do you want to play again? Enter 'y' for yes.")
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
