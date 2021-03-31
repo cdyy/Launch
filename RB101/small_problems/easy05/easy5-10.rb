@@ -19,7 +19,15 @@
 # +--+
 # You may assume that the input will always fit in your terminal window.
 
+#Further exploration (refractered - fix word-break at the end of the line)
 
+# +------------------------------------------------------------------------------+ -> whole_line
+# |                                                                              | -> empty_line
+# | This is a very long messsage to be chopped into different lines. This is a   | -> current_text_line
+# |  very long messsage to be chopped into different lines. This is a very long  | -> current_text_line
+# |  messsage to be chopped into different lines.                                | -> last_text_line
+# |                                                                              | -> empty_line
+# +------------------------------------------------------------------------------+ -> whole_line
 
 def print_in_box(text)
   whole_line = "+-" + "-" * text.length + "-+"
@@ -30,10 +38,15 @@ def print_in_box(text)
   puts "| " + text + " |"
   puts empty_line
   puts whole_line
-
 end
 
-#Further exploration
+def word_break_index(text) #to work out where to break the line without breaking any word
+  index = 76
+  while text[index] != " "
+    index -= 1
+  end
+  word_break_index = index 
+end
 
 def print_in_box_wordwrap(text)
   if text.length <= 76
@@ -48,18 +61,20 @@ def print_in_box_wordwrap(text)
 
     current_text_line = text.dup #use .dup to avoid original text to be altered.
 
-    while current_text_line.length > 76 #loop to print 1st to 2nd last line of the input text
-      puts "| " + current_text_line.slice!(0,76) + " |"
+    while current_text_line.length > 76 #print 1st to 2nd last line of the input text
+      text_line_to_print = current_text_line.slice!(0,word_break_index(current_text_line))
+      puts "| " + text_line_to_print + " " * (76 - text_line_to_print.length) + " |"
     end
 
-    puts  "| " + current_text_line + " " * (76 - current_text_line.length) + " |" 
-    #print the last line of the text, add space to keep the whole box width as 80
+    last_text_line =  "| " + current_text_line + " " * (76 - current_text_line.length) + " |" 
+    puts last_text_line
+    
     puts empty_line
     puts whole_line
   end
 end
 
-
 print_in_box_wordwrap('To boldly go where no one has gone before.')
 print_in_box_wordwrap('')
 print_in_box_wordwrap("This is a very long messsage to be chopped into different lines. This is a very long messsage to be chopped into different lines. This is a very long messsage to be chopped into different lines.")
+
