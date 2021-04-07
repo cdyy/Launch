@@ -8,8 +8,8 @@
 # halvsies([]) == [[], []]
 
 def halvsies(original_arr)
-  first_half_size = original_arr.size.even? ? (original_arr.size / 2) : (original_arr.size + 1) / 2
-  original_arr.partition {|element| original_arr.index(element) < first_half_size }
+  first_half_size = (original_arr.size / 2.0).ceil
+  original_arr.partition {|e| original_arr.index(e) < first_half_size }
 end
 
 puts halvsies([1, 2, 3, 4]) == [[1, 2], [3, 4]]
