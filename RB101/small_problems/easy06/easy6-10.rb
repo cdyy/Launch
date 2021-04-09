@@ -24,13 +24,17 @@
 # *********
 
 def triangle(n)
-  index = 1
-  loop do
-    puts " " * (n - index) + "*" * index 
-    break if index == n
-    index += 1
+  stars = 1
+  spaces = n - 1
+
+  n.times do |i|
+    puts " " * spaces + "*" * stars
+    stars += 1
+    spaces -= 1
   end
 end
 
-triangle(5)
-triangle(9)
+
+
+
+
