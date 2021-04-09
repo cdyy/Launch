@@ -34,6 +34,17 @@ def triangle(n)
   end
 end
 
+def triangle_topright(n)
+  stars = n
+  spaces = 0
+
+  n.times do |i|
+    puts " " * spaces + "*" * stars
+    stars -= 1
+    spaces += 1
+  end
+end
+
 
 
 
