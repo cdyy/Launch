@@ -22,3 +22,18 @@ end
 def word_cap(string)
 	string.split.map { |e| e[0].upcase + e[1..].downcase}.join(' ')
 end
+
+#solution 2
+def word_cap(string)
+	result = ""
+
+	string.split('').each_with_index do |letter, index|
+		if index == 0 || string[index-1] == " "
+			result << letter.upcase
+		else
+			result << letter.downcase
+		end
+	end
+
+	result
+end
