@@ -13,3 +13,12 @@
 def word_cap(string)
 	string.split.map(&:capitalize).join(' ')
 end
+
+# Further Exploration
+# Ruby conveniently provides the String#capitalize method to capitalize strings. Without that method, how would you solve this problem? Try to come up with at least two solutions.
+
+
+#solution 1
+def word_cap(string)
+	string.split.map { |e| e[0].upcase + e[1..].downcase}.join(' ')
+end
