@@ -8,11 +8,29 @@
 # swapcase('CamelCase') == 'cAMELcASE'
 # swapcase('Tonight on XYZ-TV') == 'tONIGHT ON xyz-tv'
 
+#solution 1
 def swapcase(string)
-	result = ""
-	string.each_char do |char|
-		transformed_char = char == char.downcase ? char.upcase : char.downcase
-		result << transformed_char
-	end
-	result
+  result = ""
+  string.each_char do |char|
+    transformed_char = char == char.downcase ? char.upcase : char.downcase
+	   result << transformed_char
+  end
+  result
 end
+
+#solution 2
+def swapcase2(string)
+  transformed = string.split('').map do |char|
+    if ("a".."z").include?(char)
+      char.upcase
+    elsif ("A".."Z").include?(char)
+      char.downcase
+    else
+      char
+    end 
+  end
+  transformed.join
+end
+
+# swapcase2('CamelCase') == 'cAMELcASE'
+# swapcase2('Tonight on XYZ-TV') == 'tONIGHT ON xyz-tv'
