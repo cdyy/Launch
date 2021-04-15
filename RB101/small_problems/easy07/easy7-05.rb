@@ -36,3 +36,22 @@ end
 staggered_case2('I Love Launch School!') == 'I LoVe lAuNcH ScHoOl!'
 staggered_case2('ALL_CAPS') == 'AlL_CaPs'
 staggered_case2('ignore 77 the 444 numbers') == 'IgNoRe 77 ThE 444 NuMbErS'
+
+#Further exploration
+
+def staggered_case2(string, first = true)
+	need_upper = first
+  string.split('').map do |char| 
+  	transformed_char = need_upper ? char.upcase : char.downcase
+    need_upper = !need_upper
+    transformed_char
+  end.join
+end
+
+staggered_case2('I Love Launch School!', true)
+staggered_case2('ALL_CAPS', true)
+staggered_case2('ignore 77 the 444 numbers', true)
+
+staggered_case2('I Love Launch School!', false)
+staggered_case2('ALL_CAPS', false)
+staggered_case2('ignore 77 the 444 numbers', false)
