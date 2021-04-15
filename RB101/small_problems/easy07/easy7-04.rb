@@ -5,8 +5,8 @@
 
 # Example:
 
-# swapcase('CamelCase') == 'cAMELcASE'
-# swapcase('Tonight on XYZ-TV') == 'tONIGHT ON xyz-tv'
+swapcase('CamelCase') == 'cAMELcASE'
+swapcase('Tonight on XYZ-TV') == 'tONIGHT ON xyz-tv'
 
 #solution 1
 def swapcase(string)
@@ -34,3 +34,11 @@ end
 
 # swapcase2('CamelCase') == 'cAMELcASE'
 # swapcase2('Tonight on XYZ-TV') == 'tONIGHT ON xyz-tv'
+
+#solution 3
+
+def swapcase3(string)
+  string.split('').map {|char| char =~ /[a-z]/ ? char.upcase : char.downcase}.join
+end
+
+
