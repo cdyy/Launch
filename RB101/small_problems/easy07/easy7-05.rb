@@ -7,6 +7,7 @@
 # staggered_case('ALL_CAPS') == 'AlL_CaPs'
 # staggered_case('ignore 77 the 444 numbers') == 'IgNoRe 77 ThE 444 NuMbErS'
 
+#solution 1
 
 def staggered_case(string)	
   result = []
@@ -16,3 +17,22 @@ def staggered_case(string)
   end
   result.join
 end
+
+staggered_case('I Love Launch School!') == 'I LoVe lAuNcH ScHoOl!'
+staggered_case('ALL_CAPS') == 'AlL_CaPs'
+staggered_case('ignore 77 the 444 numbers') == 'IgNoRe 77 ThE 444 NuMbErS'
+
+#solution 2
+
+def staggered_case2(string)
+	need_upper = true
+  string.split('').map do |char| 
+  	transformed_char = need_upper ? char.upcase : char.downcase
+    need_upper = !need_upper
+    transformed_char
+  end.join
+end
+
+staggered_case2('I Love Launch School!') == 'I LoVe lAuNcH ScHoOl!'
+staggered_case2('ALL_CAPS') == 'AlL_CaPs'
+staggered_case2('ignore 77 the 444 numbers') == 'IgNoRe 77 ThE 444 NuMbErS'
