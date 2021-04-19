@@ -6,6 +6,7 @@
 
 # multiply_list([3, 5, 7], [9, 10, 11]) == [27, 50, 77]
 
+#solution 1
 def multiply_list(array1, array2)
   result = []
   index = 0
@@ -14,5 +15,12 @@ def multiply_list(array1, array2)
     index += 1
     break if index >= array1.size
   end
+  result
+end
+
+#solution 2
+def multiply_list(array1, array2)
+  result = []
+  array1.each_index {|i| result << array1[i] * array2[i]}
   result
 end
