@@ -24,3 +24,12 @@ def multiply_list(array1, array2)
   array1.each_index {|i| result << array1[i] * array2[i]}
   result
 end
+
+# Further Exploration
+# The Array#zip method can be used to produce an extremely compact solution to this method. Read the documentation for zip, and see if you can come up with a one line solution (not counting the def and end lines).
+
+def multiply_list2(array1, array2)
+  array1.zip(array2).map { |sub_array| sub_array.reduce(:*)}
+end
+
+# multiply_list2([3, 5, 7], [9, 10, 11]) == [27, 50, 77]
