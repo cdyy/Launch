@@ -39,8 +39,6 @@ end
 
 def sum_of_sums(array)
   result = 0
-  array.each_index do |i|
-    result += array[0..i].sum
-  end
+  array.each_index { |i| result += array[0..i].sum }
   result
 end
