@@ -44,6 +44,3 @@ def sum_of_sums(array)
   end
   result
 end
-
-
-
