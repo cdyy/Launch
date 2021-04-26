@@ -37,16 +37,9 @@ end
 
 #Return a list of all the substrings of string that are palindromic
 def palindromes(string)
-  substrings(string).select do |substring|
-    substring = substring.split('') 
-    is_palindromic = true
-    loop do 
-       is_palindromic = substring.shift == substring.pop 
-       break if substring.size <= 1 || is_palindromic == false
-    end
-    is_palindromic
-  end
+  substrings(string).select { |substring| substring == substring.reverse && substring.size > 1 } 
 end
+
 
 
 
