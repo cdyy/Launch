@@ -18,13 +18,33 @@
 #   'nittin', 'itti', 'tt', 'ss', 'settes', 'ette', 'tt'
 # ]
 
-#Check whether a string is palindromic
+def leading_substrings(string, starting_index) 
+  result = [] 
+  string.split("").each_index {|i| result << string[starting_index..i] if i >= starting_index}
+  result
+end
+
+def substrings(string)
+  starting_index = 0
+  result = []
+  loop do
+    result << leading_substrings(string, starting_index)
+    break if starting_index >= string.size - 1
+    starting_index += 1
+  end
+  result.flatten
+end
+
+#Return a list of all the substrings of string that are palindromic
 def palindromes(string)
-    string = string.split('') 
+  substrings(string).select do |char|
+    string = char.split('') 
     is_palindromic = true
     loop do 
-       is_palindromic = string.shift == string.pop
-       break if string.size <= 1
+       is_palindromic = string.shift == string.pop 
+       break if string.size <= 1 || is_palindromic == false
     end
     is_palindromic
+  end
 end
+
