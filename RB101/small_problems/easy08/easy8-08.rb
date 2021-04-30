@@ -10,7 +10,8 @@
 
 
 def double_consonants(string)
+  format = /[^aeiou\d\s\W]/i
   string.split('').map do |char| 
-    char.match(/^aeiou/i) ? char * 2 : char
+    char.match?(format) ? char * 2 : char
   end.join
 end
