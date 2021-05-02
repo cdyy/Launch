@@ -22,3 +22,13 @@ def reversed_number(number)
   number.to_s.split('').each {|num| list_reversed.unshift(num) }
   list_reversed.join.to_i
 end
+
+#solution without loop
+
+# - convert the number into string
+# - reverse the string
+# - convert back to number
+
+def reversed_number(number)
+  number.to_s.reverse.to_i
+end
