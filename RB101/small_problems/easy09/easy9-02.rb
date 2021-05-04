@@ -16,6 +16,8 @@
 # twice(123_456_789_123_456_789) == 123_456_789_123_456_789
 # twice(5) == 10
 
+# Note: underscores are used for clarity above. Ruby lets you use underscores when writing long numbers; however, it does not print the underscores when printing long numbers. Don't be alarmed if you don't see the underscores when running your tests.
+
 # my solution
 
 # - intiate a string variable for converting the input number in string 
@@ -33,12 +35,9 @@
 
 def twice(number)
   digits = number.to_s
-  left_side = digits.slice(0, digits.size / 2)
-  right_side = digits[digits.size/2..]
+  center = digits.size / 2
+  left_side = digits.slice(0, center)
+  right_side = digits[center..]
 
-  if digits.size.even? && first_half == second_half
-    number
-  else
-    number * 2
-  end
+  left_side == right_side ? number : number * 2
 end
