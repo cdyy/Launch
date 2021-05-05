@@ -10,5 +10,5 @@
 # my solution
 
 def negative(num)
-  num > 0 ? 0 - num : num
+  num > 0 ? -num : num
 end
