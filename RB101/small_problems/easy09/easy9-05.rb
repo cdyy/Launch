@@ -22,3 +22,11 @@ def uppercase?(string)
   downcase_total = characters_arr.count {|char| char.upcase != char}
   downcase_total > 0 ? false : true
 end
+
+# a simpler and much better approach...
+
+def uppercase?(string)
+  string.upcase == string
+end
+
+# why would I think we need to compare character by character when I already can compare the whole string!?
