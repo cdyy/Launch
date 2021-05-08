@@ -26,3 +26,10 @@
 def word_lengths(string)
   string.split.map { |word| word + " " + word.size.to_s}
 end
+
+
+# use of string interpolation
+
+def word_lengths(string)
+  string.split.map { |word| "#{word} #{word.size}"}
+end
