@@ -17,3 +17,14 @@ def buy_fruit(grocery_list)
   grocery_list.each { |sub_array| sub_array[1].times {|i| result << sub_array[0]} } 
   result
 end
+
+# refactor (more readable)
+
+def buy_fruit(grocery_list)
+  result = []
+  grocery_list.each do |sub_array|
+    fruit, quantity = sub_array[0], sub_array[1]
+    quantity.times {|i| result << fruit}
+  end
+  result
+end
