@@ -13,3 +13,12 @@
 def is_anagram?(word1, word2)
   word1.split('').sort == word2.split('').sort
 end
+
+def group_anagram(words)
+  anagrams = []
+  words.each do |word1|
+    group = words.select {|word2| is_anagram?(word1, word2)}.sort
+    anagrams << group
+  end
+  anagrams.uniq.each {|group| p group}
+end
