@@ -10,6 +10,8 @@
 # ["neon", "none"]
 # #(etc)
 
+# my solution
+
 def is_anagram?(word1, word2)
   word1.split('').sort == word2.split('').sort
 end
@@ -21,4 +23,22 @@ def group_anagram(words)
     anagrams << group
   end
   anagrams.uniq.each {|group| p group}
+end
+
+# LS solution
+
+result = {}
+
+words.each do |word|
+  key = word.split('').sort.join
+  if result.has_key?(key)
+    result[key].push(word)
+  else
+    result[key] = [word]
+  end
+end
+
+result.each_value do |v|
+  puts "------"
+  p v
 end
