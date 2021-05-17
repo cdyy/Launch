@@ -19,3 +19,18 @@ def rotate_array(array)
   array_copy.shift
   array_copy << array[0]
 end
+
+# Further Exploration
+
+# Write a method that rotates a string instead of an array. Do the same thing for integers. You may use rotate_array from inside your new method.
+
+def rotate(input)
+  if input.to_s == input
+    string_arr = input.split('')
+    rotate_array(string_arr).join
+  else
+    rotate_array(input)
+  end
+end
+
+# rotate('great') == 'reatg'
