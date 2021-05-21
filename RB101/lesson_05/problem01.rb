@@ -7,10 +7,14 @@
 
 # arr = ['10', '11', '9', '7', '8']
 
-#.sort
+#solution 1
 
 arr.each_index do |i|
   if arr[i].to_i < arr[i + 1].to_i
     arr[i], arr[i + 1] = arr[i + 1], arr[i]
   end
 end
+
+#solution 2
+
+p arr.sort {|a, b| b.to_i <=> a.to_i }
