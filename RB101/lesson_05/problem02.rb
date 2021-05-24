@@ -11,3 +11,7 @@ books = [
 # my solution
 
 books.sort {|a, b| a[:published] <=> b[:published]}
+
+# solution2
+
+books.sort_by {|book| book[:published]}
