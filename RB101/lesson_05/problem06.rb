@@ -23,3 +23,8 @@ munsters.each do |key, value|
   puts "#{name} is a #{age}-year-old #{gender}." 
 end
 
+#LS answer
+munsters.each do |name, details|
+  puts "#{name} is a #{details["age"]}-year-old #{details["gender"]}."
+end
+
