@@ -4,4 +4,6 @@
 arr = [['b', 'c', 'a'], [2, 1, 3], ['blue', 'black', 'green']]
 
 #my answer
-arr.map { |array| array.sort }
+arr.map do |array| 
+  array.sort { |first, last| last <=> first }
+end
